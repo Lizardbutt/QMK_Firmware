@@ -1,0 +1,3 @@
+TRI_LAYER_ENABLE = yes
+OLED_ENABLE = yes
+MIDI_ENABLE = yes
