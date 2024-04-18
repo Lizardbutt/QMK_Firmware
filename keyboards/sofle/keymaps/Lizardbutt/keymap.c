@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            |      |      |      |       |/       /         \      \ |      |      |      |      |
  *            '------------------------------------'           '------''---------------------------'          */
 [_ONESHOT] = LAYOUT(
-  KC_KB_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OSM(_OPTIONS),
+  KC_KB_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OSL(_OPTIONS),
   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, KC_FIND, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX,    XXXXXXX, XXXXXXX, KC_COPY, KC_PSTE, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
