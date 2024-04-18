@@ -7,7 +7,8 @@ enum sofle_layers {
     _SPECIAL,
     _FUNCTION,
     _CHARACTERS,
-    _ONESHOT
+    _ONESHOT,
+    _OPTIONS
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -21,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-------+-----+------+------+------+-----| XXXXX |    | XXXXX |------+------+------+------+------+------|
  * | LCTRL | Z   | X    | C    | V    | B   |-------|    |-------| N    | M    | = +  | , <  | . >  | / ?  |
  * `----------------------------------------/       /     \      \-----------------------------------------'
- *        | LGUI | LAlt | MO 3 | Backspc | / Enter /       \ MO 2 \  | Space | MO 1 | XXXX | XXXX |
+ *        | LGUI | LAlt | MO 3 | Backspc | / Enter /       \ MO 2 \  | Space | MO 1 | XXXX | OSL1 |
  *        |      |      |      |         |/       /         \      \ |       |      |      |      |
  *        '------------------------------''------'           '------''----------------------------'       */
 [_BASE] = LAYOUT(
@@ -47,9 +48,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            '-----------------------------------'           '------''---------------------------'        */   
 [_SPECIAL] = LAYOUT(
   KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, KC_NUM, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,
-  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,                        KC_PGUP, KC_P7,  KC_P8,   KC_P9,   KC_PPLS, XXXXXXX,
-  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_U,                       KC_PGDN, KC_P4,  KC_P5,   KC_P6,   XXXXXXX, XXXXXXX,
-  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_WH_D, XXXXXXX,     XXXXXXX, KC_HOME, KC_P1,  KC_P2,   KC_P3,   KC_PENT, XXXXXXX,
+  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_PGUP, KC_P7,  KC_P8,   KC_P9,   KC_PPLS, XXXXXXX,
+  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,                        KC_PGDN, KC_P4,  KC_P5,   KC_P6,   XXXXXXX, XXXXXXX,
+  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, KC_HOME, KC_P1,  KC_P2,   KC_P3,   KC_PENT, XXXXXXX,
                     KC_TRNS, KC_TRNS, XXXXXXX, KC_TRNS, KC_TRNS,     XXXXXXX, XXXXXXX, KC_P0,  XXXXXXX, KC_PDOT
 ),
 
@@ -71,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       XXXXXXX, XXXXXXX, KC_MPLY, KC_MPRV,  KC_MNXT, KC_MUTE,
   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                      XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX,  XXXXXXX, KC_VOLU,
   KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, KC_VOLD,
-  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,
+  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, KC_WSCH,
                     KC_TRNS, KC_TRNS, XXXXXXX, KC_TRNS, KC_TRNS,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
@@ -79,41 +80,63 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | PT   |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | PT   |      |      |      |      |      |                    | *    |      |      |      | _    | |    |
+ * | PT   | !    |      |      |      |      |                    | *    | %    | "    | '    | _    | |    |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | PT   | <    | [    | {    | (    | -    |-------.    ,-------| +    | )    | }    | ]    | >    |      |
+ * | PT   | <    | [    | {    | (    | -    |-------.    ,-------| +    | )    | }    | ]    | >    | `    |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * | PT   |      |      |      | @    | &    |-------|    |-------| ~    | ^    |      | '    | "    | ?    |
+ * | PT   |      |      |      | @    | &    |-------|    |-------| ~    | ^    |      |      |      | ?    |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |      |      |      |      | /       /       \      \  |      |      |      |      |
+ *            | PT   | PT   |      | PT   | / PT    /       \      \  |      |      |      |      |
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            '-----------------------------------'           '------''---------------------------'        */
 [_CHARACTERS] = LAYOUT(
   KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_GRV,                        KC_ASTR, XXXXXXX, XXXXXXX, XXXXXXX, KC_UNDS, KC_PIPE,
-  KC_TRNS, KC_LABK, KC_LBRC, KC_LCBR, KC_LPRN, KC_MINS,                       KC_PLUS, KC_RPRN, KC_RCBR, KC_RBRC, KC_RABK, XXXXXXX,
-  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, KC_AT,   KC_AT,   XXXXXXX,     XXXXXXX, KC_TILD, KC_CIRC, XXXXXXX, KC_QUOT, KC_DQT,  KC_QUES,
-                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  KC_TRNS, KC_EXLM, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_ASTR, KC_PERC, KC_DQT , KC_QUOT, KC_UNDS, KC_PIPE,
+  KC_TRNS, KC_LABK, KC_LBRC, KC_LCBR, KC_LPRN, KC_MINS,                       KC_PLUS, KC_RPRN, KC_RCBR, KC_RBRC, KC_RABK, KC_GRV,
+  KC_TRNS, XXXXXXX, XXXXXXX, XXXXXXX, KC_AT,   KC_AMPR, XXXXXXX,     XXXXXXX, KC_TILD, KC_CIRC, XXXXXXX, XXXXXXX, XXXXXXX, KC_QUES,
+                    KC_TRNS, KC_TRNS, XXXXXXX, KC_TRNS, KC_TRNS,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 ),
+
 /* One Shot
- * ,------------------------------------------.                    ,-------------------------------------------.
- * | Mute |      |      |       |      |      |                    |      |      |      |      |      |        |
- * |------+------+------+-------+------+------|                    |------+------+------+------+------+--------|
- * |      |      |      |       |      |      |                    |      |      |      |      |      |        |
- * |------+------+------+-------+------+------|                    |------+------+------+------+------+--------|
- * |      |      |      | Find  |      |      |-------.    ,-------|      |      |      |      |      |        |
- * |------+------+------+-------+------+------|       |    |       |------+------+------+------+------+--------|
- * |      |      | Copy | Paste |      |      |-------|    |-------|      |      |      |      |      |        |
- * `-----------------------------------------/       /      \      \-------------------------------------------'
- *            |      |      |      |      | /       /        \      \  |      |      |      |      |
- *            |      |      |      |      |/       /          \      \ |      |      |      |      |
- *            '-----------------------------------'            '------''---------------------------'        */
+ * ,------------------------------------------.                    ,--------------------------------------------.
+ * | Mute |      |      |      |       |      |                    | Boot |      |      |      |      | Options |
+ * |------+------+------+------+-------+------|                    |------+------+------+------+------+---------|
+ * |      |      |      |      |       |      |                    |      |      |      |      |      |         |
+ * |------+------+------+------+-------+------|                    |------+------+------+------+------+---------|
+ * |      |      |      |      | Find  |      |-------.    ,-------|      |      |      |      |      |         |
+ * |------+------+------+------+-------+------|       |    |       |------+------+------+------+------+---------|
+ * |      |      |      | Copy | Paste |      |-------|    |-------|      |      |      |      |      |         |
+ * `------------------------------------------/       /     \      \--------------------------------------------'
+ *            | PT   | PT   |      | PT    | / PT    /       \      \  |      |      |      |      |
+ *            |      |      |      |       |/       /         \      \ |      |      |      |      |
+ *            '------------------------------------'           '------''---------------------------'          */
 [_ONESHOT] = LAYOUT(
-  KC_KB_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  KC_KB_MUTE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OSM(_OPTIONS),
   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX,    XXXXXXX, XXXXXXX, KC_FIND, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX,    XXXXXXX, KC_COPY, KC_PSTE, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, KC_FIND, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX,    XXXXXXX, XXXXXXX, KC_COPY, KC_PSTE, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                       KC_TRNS, KC_TRNS, XXXXXXX, KC_TRNS, KC_TRNS,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+),
+
+/* Options
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      |      |      |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *            |      |      |      |      | /       /       \      \  |      |      |      |      |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            '-----------------------------------'           '------''---------------------------'        */
+[_OPTIONS] = LAYOUT(
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, MU_ON,   CK_UP,   CK_ON,   AU_ON,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, MU_OFF,  CK_DOWN, CK_OFF,  AU_OFF,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, MU_TOGG, XXXXXXX, CK_TOGG, AU_TOGG,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 )
 };
 
