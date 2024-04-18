@@ -413,7 +413,11 @@ bool oled_task_user() {
             break;
         case _ONESHOT :
             oled_clear();
-            oled_write("Cum\nLayer", false);
+            oled_write("OSL\nLayer", false);
+            break;
+        case _OPTIONS :
+            oled_clear();
+            oled_write("Opt\nLayer", false);
             break;
         }
     return false;
